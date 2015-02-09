@@ -168,13 +168,9 @@ Api.prototype = {
     var service = this.service(id);
     var method = (typeof service === "string" ? "get" : service.method ||
       "get").toLowerCase();
-
+    // fix for delete being a reserved word
     if (method === "delete") {
-      // fix for delete being a reserved word
       method = "del";
-
-      // don't send data with delete
-      data = undefined;
     }
 
     if (!this.agent) {
