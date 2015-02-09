@@ -4,7 +4,7 @@
   @copyright Stéphane Bachelier <stephane.bachelier@gmail.com>
   @license MIT
   */
-define("superapi/api",
+define("superapi/api", 
   ["exports"],
   function(__exports__) {
     "use strict";
@@ -177,9 +177,13 @@ define("superapi/api",
         var service = this.service(id);
         var method = (typeof service === "string" ? "get" : service.method ||
           "get").toLowerCase();
-        // fix for delete being a reserved word
+
         if (method === "delete") {
+          // fix for delete being a reserved word
           method = "del";
+
+          // don't send data with delete
+          data = undefined;
         }
 
         if (!this.agent) {
@@ -242,7 +246,7 @@ define("superapi/api",
 
     __exports__["default"] = Api;
   });
-define("superapi",
+define("superapi", 
   ["./superapi/api","exports"],
   function(__dependency1__, __exports__) {
     "use strict";
